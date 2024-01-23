@@ -10,7 +10,7 @@ public class ProductRepositoryTest {
     PurchaseFilm film5 = new PurchaseFilm("Элла и медведь", "Мультфильм", 2024);
     PurchaseFilm film6 = new PurchaseFilm("Чупапимунянья", "Мем", 2022);
     ProductRepository repo = new ProductRepository();
-    ProductRepository repoSet = new ProductRepository(2);
+    ProductRepository repoSet = new ProductRepository(3);
 
     @Test
     public void addFilm() {
@@ -51,7 +51,40 @@ public class ProductRepositoryTest {
         repoSet.add(film5);
         repoSet.add(film6);
 
+        PurchaseFilm[] expected = {film6, film5, film4};
+        PurchaseFilm[] actual = repoSet.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastFilmSetExactly() {
+        repoSet.add(film4);
+        repoSet.add(film5);
+        repoSet.add(film6);
+
+        PurchaseFilm[] expected = {film6, film5, film4};
+        PurchaseFilm[] actual = repoSet.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastFilmSetLess() {
+        repoSet.add(film5);
+        repoSet.add(film6);
+
         PurchaseFilm[] expected = {film6, film5};
+        PurchaseFilm[] actual = repoSet.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLastFilmSetLess2() {
+        repoSet.add(film5);
+
+        PurchaseFilm[] expected = {film5};
         PurchaseFilm[] actual = repoSet.findLast();
 
         Assertions.assertArrayEquals(expected, actual);

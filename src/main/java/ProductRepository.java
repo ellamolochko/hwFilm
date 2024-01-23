@@ -21,6 +21,9 @@ public class ProductRepository {
     }
 
     public PurchaseFilm[] findLast() {
+        if(films.length < sizeLast) {
+           sizeLast = films.length;
+        }
         PurchaseFilm[] reversed = new PurchaseFilm[sizeLast];
         for (int i = 0; i < reversed.length; i++) {
             reversed[i] = films[films.length - 1 - i];
